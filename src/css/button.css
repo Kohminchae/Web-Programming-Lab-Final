@@ -1,0 +1,22 @@
+.button-component {  
+  box-shadow: rgba(215, 142, 140, 0.4) 0 2px 4px,rgba(215, 142, 140, 0.3) 0 7px 13px -3px,#D78E8C 0 -3px 0 inset;
+  cursor: pointer;
+  padding-left: 16px;
+  padding-right: 16px;
+  transition: box-shadow .15s,transform .15s;
+  touch-action: manipulation;
+}
+
+.button-component:focus {
+  box-shadow: #D78E8C 0 0 0 1.5px inset, rgba(215, 142, 140, 0.4) 0 2px 4px, rgba(215, 142, 140, 0.3) 0 7px 13px -3px, #D78E8C 0 -3px 0 inset;
+}
+
+.button-component:hover {
+  box-shadow: rgba(215, 142, 140, 0.4) 0 4px 8px, rgba(215, 142, 140, 0.3) 0 7px 13px -3px, #D78E8C 0 -3px 0 inset;
+  transform: translateY(-4px);
+}
+
+.button-component:active {
+  box-shadow: #D78E8C 0 3px 7px inset;
+  transform: translateY(4px);
+}

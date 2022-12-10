@@ -1,0 +1,17 @@
+.App {
+  font-family: "webcomic";
+  width: 100%;
+  text-align: center;
+  padding-top: calc(50% - 140px);
+  padding-bottom: calc(50% - 140px);
+  user-select: none;
+}
+.intro {
+  font-size: 5rem;
+  height: 100px;
+}
+.button {
+  width: 132px;
+  margin: 0 auto;
+  margin-top: 30px;
+}
