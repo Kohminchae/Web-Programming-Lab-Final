@@ -4,34 +4,43 @@
   height: 60vh;
   margin: 0 auto;
   text-align: center;
+  padding-top: calc(30vh - 10.5rem - 10px);
 }
 .table {
-  padding-left: calc(24vw - 11rem);
-  padding-top: calc(30vh - 5.25rem - 10px)
+  margin: 0 auto;
+  border: 1px solid #AD6B69;
+  border-radius: 20px;
 }
 td, th {
-  height: 1.5rem;
+  height: 3rem;
+  font-size: 2rem;
+  border-left: 1px solid #AD6B69;  
+}
+td:first-child, th:first-child {
+  border-left: none;
+}
+th {
+  border-bottom: 1px solid #AD6B69;
 }
 .row-index {
-  width: 2rem;
+  width: 4vw;
 }
 .row-first {
-  width: 10rem;
+  width: 20vw;
 }
 .row-second {
-  width: 10rem;
+  width: 24vw;
 }
 .pagination {
   display: flex;
   margin: 20px 0 0 0;
-  padding-left: calc(24vw - 3rem - 15px);
+  padding-left: calc(24vw - 4.5rem - 19.5px);
 }
 .paginationItem {
-  width: 1.5rem;
-  height: 1.5rem;
-  line-height: 1.5rem;
-  text-align: center;
-  font-size: 0.7rem;
+  width: 3rem;
+  height: 3rem;
+  line-height: 3rem;
+  font-size: 1rem;
   color: #AD6B69;
   border: 1.5px solid #AD6B69; 
   border-radius: 10px;

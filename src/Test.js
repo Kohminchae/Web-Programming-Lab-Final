@@ -2,6 +2,8 @@ import "./css/test.css";
 import { useEffect, useState, useRef } from 'react';
 import Button from "./component/Button";
 import { Link } from "react-router-dom";
+import { db } from './firebase_config.js'
+import { ref, onValue, update } from "firebase/database";
 
 function Test() {
   const [state, setState] = useState(0)
@@ -13,17 +15,11 @@ function Test() {
   const [wordIndex, setIndex] = useState([])
   const [score, setScore] = useState(0)
   const userInput = useRef() 
+  const [words, setWord] = useState()
+  const [isMounted, setMount] = useState(false)
+  const [trial, setTry] = useState(0)
 
-  const words = [
-    ['apprehensive', '걱정하는, 염려하는', 0],
-    ['asdf', 'ㅁㄴㄹ', 0],
-    ['qw', 'ㅈㄷㄱ', 0],
-    ['af', 'ㅈㄱ', 0],
-    ['e', 'ㅁㄴㅇㄹ염려하는', 0],
-    ['g', '걱정하는ㄹㅎ', 0],
-    ['ghfj', '걱정하ㅁㅇ려하는', 0],
-    ['xzv', '걱ㄴㅇㄹㄹ려하는', 0],
-  ]
+  const refs = ref(db, "words")
 
   const nextQuestion = () => {
     checkAnswer()
@@ -37,11 +33,25 @@ function Test() {
   }
 
   const checkAnswer = () => {
-    if(userInput.current.value === words[wordIndex[curQuestion]][1]){
-      words[wordIndex[curQuestion]][2]++;
+    if(userInput.current.value === words[wordIndex[curQuestion]].word2){
+      setWord(words => {
+        const newWords = [...words]
+        newWords[wordIndex[curQuestion]].try[trial]++;
+        return newWords
+      })
     } else {
-      words[wordIndex[curQuestion]][2]--;
+      setWord(words => {
+        const newWords = [...words]
+        newWords[wordIndex[curQuestion]].try[trial]--;
+        return newWords
+      })
     }
+  }
+
+  const testAgain = () => {
+    update(ref(db), {words: words});
+
+    setState(0)
   }
 
   useEffect(()=>{ // count down Effect
@@ -57,7 +67,7 @@ function Test() {
       }
     }
   },[countDown, state])
-  
+
   useEffect(()=>{ // select random word set 
     if(state === 2) {
       let wordSetMaking = [];
@@ -85,6 +95,7 @@ function Test() {
   },[curTime])
 
   useEffect(()=>{
+    console.log(words)
     if(state === 3){ // calculate score
       let count = 0
       words.map(i => {
@@ -93,6 +104,31 @@ function Test() {
       setScore(count)
     }
   },[state])
+
+  useEffect(()=>{
+    setMount(!isMounted)
+  },[])
+
+  useEffect(()=>{
+    if(isMounted === true){
+      onValue(refs, (snapshot) => {
+        let getData = snapshot.val();
+        getData.map((d, index) => {
+          if(d.try === undefined){
+            setTry(0)
+            d.try = [0];
+            getData[index] = d;
+          } else{
+            d.try.push(0)
+            if(!trial) setTry(d.try.length);
+          }
+        })
+        setWord(getData)
+      });
+      setMount(!isMounted)
+      
+    }
+  },[isMounted])
 
   return (
     <div className="test-container">
@@ -131,7 +167,7 @@ function Test() {
         (state === 2) && 
           <div className="test-start">
             <div className="test-timer">Timer: {curTime}</div>
-            <div className="current-word">{wordIndex[curQuestion] && words[wordIndex[curQuestion]][0]}</div>
+            <div className="current-word">{wordIndex[curQuestion] && words[wordIndex[curQuestion]].word1}</div>
             <input type="text" ref={userInput} />
             <div className="start-button">
               <Button text="next" height="60px" width="200px" whenClicked={nextQuestion} />
@@ -145,7 +181,7 @@ function Test() {
           <div className="test-finish">
             <div className="test-score">{score} / {question}</div>
             <div className="start-button">
-              <Button text="Try again?" height="60px" width="200px" whenClicked={() => setState(0)} />
+              <Button text="Try again?" height="60px" width="200px" whenClicked={testAgain()} />
             </div>
           </div>
       }

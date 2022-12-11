@@ -15,6 +15,7 @@ export function Right(props) {
   )
 }
 function Table({cols, rows}) {
+  console.log(rows)
   const [currentPage, setPage] = useState(0)
   const pageEnd = rows.length % 5 === 0 ? rows.length / 5 - 1 : parseInt(rows.length / 5)
   return (
@@ -32,9 +33,9 @@ function Table({cols, rows}) {
           {rows.slice(currentPage*5, currentPage*5 + 5 < rows.length ? currentPage*5 + 5 : rows.length).map(
             (row, index) => 
               <tr key={index}>
-                <td className="row-index">{index + currentPage*5}</td>
-                <td className="row-first">{row[0]}</td>
-                <td className="row-second">{row[1]}</td>
+                <td className="row-index">{index + currentPage*5 + 1}</td>
+                <td className="row-first">{row.word1}</td>
+                <td className="row-second">{row.word2}</td>
               </tr>
           )}
         </tbody>
@@ -50,7 +51,7 @@ function Table({cols, rows}) {
             <Left />
           </div>}
 
-        <div className="paginationItem">{currentPage}</div>
+        <div className="paginationItem">{currentPage+1}</div>
         
         {(currentPage === pageEnd) &&
           <div className="paginationItem">
