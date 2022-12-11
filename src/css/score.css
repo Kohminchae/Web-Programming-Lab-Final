@@ -16,3 +16,16 @@
   color: #947A77;
   text-decoration: none;
 }
+.button-group {
+  width: calc(50vw - 8rem);
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px 0 0 4rem;
+}
+.button-container {
+  margin: 5px 10px 5px 0;
+}
+.score {
+  font-size: 3rem;
+  margin: 20px 0 20px 2vw;
+}

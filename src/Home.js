@@ -31,7 +31,7 @@ function Menu() {
         resp.rows.map(data => datas.push({
           word1: data[0],
           word2: data[1],
-          try:[]
+          try: [0]
         }))
         storeWord(datas)
       }

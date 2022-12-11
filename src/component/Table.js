@@ -1,7 +1,5 @@
 import { useState } from "react";
 import '../css/table.css';
-//import Left from '~icons/fa6-solid/angle-left';
-//import Right from '~icons/fa6-solid/angle-right';
 
 export function Left(props) {
   return (
@@ -18,6 +16,7 @@ function Table({cols, rows}) {
   console.log(rows)
   const [currentPage, setPage] = useState(0)
   const pageEnd = rows.length % 5 === 0 ? rows.length / 5 - 1 : parseInt(rows.length / 5)
+
   return (
     <div className="table-container">
       <div className="table">
@@ -53,11 +52,11 @@ function Table({cols, rows}) {
 
         <div className="paginationItem">{currentPage+1}</div>
         
-        {(currentPage === pageEnd) &&
+        {(currentPage >= pageEnd) &&
           <div className="paginationItem">
             <Right />
           </div>}
-        {(currentPage !== pageEnd) && 
+        {(currentPage < pageEnd) && 
           <div className="paginationItem" onClick={()=>setPage(pre => pre+1)} style={{cursor: "pointer"}}>
             <Right />
           </div>}

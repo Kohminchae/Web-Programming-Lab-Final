@@ -9,6 +9,9 @@
   border-radius: 4rem;
   height: 60vh;
 }
+.list-table {
+  padding-top: calc(30vh - 10.5rem - 10px);
+}
 .home {
   margin: 0 0 5px 4rem;
   width: 50px;

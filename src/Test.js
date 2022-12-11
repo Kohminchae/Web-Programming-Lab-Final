@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from 'react';
 import Button from "./component/Button";
 import { Link } from "react-router-dom";
 import { db } from './firebase_config.js'
-import { ref, onValue, update } from "firebase/database";
+import { ref, onValue, update, set } from "firebase/database";
 
 function Test() {
   const [state, setState] = useState(0)
@@ -22,17 +22,8 @@ function Test() {
   const refs = ref(db, "words")
 
   const nextQuestion = () => {
-    checkAnswer()
-    userInput.current.value = ""
-    setCurTime(()=>time)
-    if(curQuestion < question - 1) {
-      setCurQuestion(preQ => preQ + 1)
-    } else {
-      setState(pre => pre + 1) // change state to test finish
-    }
-  }
-
-  const checkAnswer = () => {
+    // check answer if it is correct
+    console.log(curQuestion, wordIndex , words[wordIndex[curQuestion]])
     if(userInput.current.value === words[wordIndex[curQuestion]].word2){
       setWord(words => {
         const newWords = [...words]
@@ -46,18 +37,19 @@ function Test() {
         return newWords
       })
     }
-  }
 
-  const testAgain = () => {
-    update(ref(db), {words: words});
-
-    setState(0)
+    userInput.current.value = ""
+    setCurTime(()=>time)
+    if(curQuestion < question - 1) {
+      setCurQuestion(preQ => preQ + 1)
+    } else {
+      setState(pre => pre + 1) // change state to test finish
+    }
   }
 
   useEffect(()=>{ // count down Effect
     if(state === 1){
       if(countDown > 0) {
-
         const timer = setInterval(()=>{
           setCount(pre => pre-1)
         }, 1000)
@@ -71,9 +63,9 @@ function Test() {
   useEffect(()=>{ // select random word set 
     if(state === 2) {
       let wordSetMaking = [];
-      for(let i = 0; i < question; i++){
-        let index = Math.floor(Math.random()*words.length)
-        wordSetMaking.push(index)
+      while(wordSetMaking.length < question){
+        var r = Math.floor(Math.random() * (words.length-1)) + 1;
+        if(wordSetMaking.indexOf(r) === -1) wordSetMaking.push(r);
         setIndex(() => wordSetMaking)
       }
       setCurTime(()=>time)
@@ -82,7 +74,7 @@ function Test() {
 
   useEffect(()=>{ // timer during test
 
-    if(state === 2){
+    if(state === 2){ 
       if(curTime >= 0) {
         const timer = setInterval(()=>{
           setCurTime(time => time - 1)
@@ -94,12 +86,11 @@ function Test() {
     }
   },[curTime])
 
-  useEffect(()=>{
-    console.log(words)
-    if(state === 3){ // calculate score
+  useEffect(()=>{ // calculate score
+    if(state === 3){ 
       let count = 0
       words.map(i => {
-        if(i[2] === 1) count++
+        if(i.try[trial] === 1) count++
       })
       setScore(count)
     }
@@ -109,7 +100,7 @@ function Test() {
     setMount(!isMounted)
   },[])
 
-  useEffect(()=>{
+  useEffect(()=>{ // how many try
     if(isMounted === true){
       onValue(refs, (snapshot) => {
         let getData = snapshot.val();
@@ -119,16 +110,26 @@ function Test() {
             d.try = [0];
             getData[index] = d;
           } else{
+            setTry(d.try.length);
             d.try.push(0)
-            if(!trial) setTry(d.try.length);
           }
         })
         setWord(getData)
       });
       setMount(!isMounted)
-      
     }
-  },[isMounted])
+  },[isMounted,words])
+
+  useEffect(()=>{ // test again, store the result
+    let updates = {}
+    if(trial && (state === 0)){    
+      //.map((i, index)=> {update["/words/" + index] = i})
+      words.map((w, index)=>updates["/words/" + index + "/try/"] = w.try)
+      update(ref(db), updates)
+      //words.map((w, index)=>set(ref(db, "words/"+index+"try"), words.try))
+    }
+    console.log("hawer")
+  },[state])
 
   return (
     <div className="test-container">
@@ -181,7 +182,7 @@ function Test() {
           <div className="test-finish">
             <div className="test-score">{score} / {question}</div>
             <div className="start-button">
-              <Button text="Try again?" height="60px" width="200px" whenClicked={testAgain()} />
+              <Button text="Try again?" height="60px" width="200px" whenClicked={()=>{setState(0); setCurQuestion(0)}} />
             </div>
           </div>
       }

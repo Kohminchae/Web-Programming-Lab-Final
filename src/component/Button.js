@@ -1,3 +1,4 @@
+import { set } from 'firebase/database';
 import '../css/button.css';
 
 function Button({color, text, height, width, whenClicked}) {
