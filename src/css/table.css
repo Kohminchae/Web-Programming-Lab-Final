@@ -1,0 +1,39 @@
+.table-container {
+  user-select: none;
+  width: 48vw;
+  height: 60vh;
+  margin: 0 auto;
+  text-align: center;
+}
+.table {
+  padding-left: calc(24vw - 11rem);
+  padding-top: calc(30vh - 5.25rem - 10px)
+}
+td, th {
+  height: 1.5rem;
+}
+.row-index {
+  width: 2rem;
+}
+.row-first {
+  width: 10rem;
+}
+.row-second {
+  width: 10rem;
+}
+.pagination {
+  display: flex;
+  margin: 20px 0 0 0;
+  padding-left: calc(24vw - 3rem - 15px);
+}
+.paginationItem {
+  width: 1.5rem;
+  height: 1.5rem;
+  line-height: 1.5rem;
+  text-align: center;
+  font-size: 0.7rem;
+  color: #AD6B69;
+  border: 1.5px solid #AD6B69; 
+  border-radius: 10px;
+  margin: 0 5px 0 5px;
+}

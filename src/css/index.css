@@ -4,7 +4,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #E8D7D9;
-  font-family: "webcomic";
+  font-family: "NanumSquareRound";
 }
 #root {
   height: 100%;
@@ -12,6 +12,18 @@ body {
   margin: 0 auto;
 }
 @font-face {
-  font-family: "webcomic";
-  src: url(../font/Webcomic.ttf);
+  font-family: "NanumSquareRound-bold";
+  src: url(../font/NanumSquareRoundB.ttf);
+}
+@font-face {
+  font-family: "NanumSquareRound-extrabold";
+  src: url(../font/NanumSquareRoundEB.ttf);
+}
+@font-face {
+  font-family: "NanumSquareRound-large";
+  src: url(../font/NanumSquareRoundL.ttf);
+}
+@font-face {
+  font-family: "NanumSquareRound";
+  src: url(../font/NanumSquareRoundR.ttf);
 }

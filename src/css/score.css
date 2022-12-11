@@ -1,0 +1,18 @@
+.score-container {
+  height: 80vh;
+  padding-top: calc(20vh - 1rem - 5px);
+  width: 50vw;
+  user-select: none;
+}
+.score-body {
+  border: 3px solid #D78E8C;
+  border-radius: 4rem;
+  height: 60vh;
+}
+.home {
+  margin: 0 0 5px 4rem;
+  width: 50px;
+  font-size: 1rem;
+  color: #947A77;
+  text-decoration: none;
+}

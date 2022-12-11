@@ -1,11 +1,12 @@
 .menuCard-component { 
   background-color: #EBC4BE;
-  color: white;
-  font-size: 5rem;
+  color: #AD6B69;
+  font-size: 4rem;
+  font-family: "NanumSquareRound-bold";
   text-align: center;
   line-height: 110px;
   height: 110px;
-  width: 400px; 
+  width: 450px; 
   border-radius: 50px;
   margin-top: 30px;
   margin-bottom: 30px; 
@@ -15,6 +16,7 @@
   padding-right: 16px;
   transition: box-shadow .15s,transform .15s;
   touch-action: manipulation;
+  user-select: none;
 }
 
 .menuCard-component:focus {

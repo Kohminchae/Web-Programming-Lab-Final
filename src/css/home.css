@@ -1,17 +1,23 @@
 .App {
-  font-family: "webcomic";
+  font-family: "NanumSquareRound-extrabold";
   width: 100%;
   text-align: center;
-  padding-top: calc(50% - 140px);
-  padding-bottom: calc(50% - 140px);
+  padding-top: calc(50% - 200px);
+  padding-bottom: calc(50% - 200px);
   user-select: none;
 }
 .intro {
+  color: #AD6B69;
   font-size: 5rem;
   height: 100px;
 }
 .button {
-  width: 132px;
+  width: 232px;
   margin: 0 auto;
   margin-top: 30px;
+}
+.file-name {
+  font-family: "NanumSquareRound";
+  margin-top: 20px;
+  font-size: 1.5rem;
 }

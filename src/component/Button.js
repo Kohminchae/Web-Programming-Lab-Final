@@ -1,10 +1,10 @@
 import '../css/button.css';
 
-function button({color, text, height, width, fontSize}) {
+function Button({color, text, height, width, whenClicked}) {
 
   const buttonStyle = {
     backgroundColor: color ? color : "#EBC4BE",
-    color: "white",
+    color: "#AD6B69",
     fontSize: height ? parseInt(height)*0.4 : "12px",
     lineHeight: height ? height : "30px",
     textAlign: "center",
@@ -14,10 +14,10 @@ function button({color, text, height, width, fontSize}) {
   }
 
   return (
-    <div className="button-component" style={buttonStyle}>
+    <div className="button-component" style={buttonStyle} onClick={whenClicked}>
       {text}
     </div>
   );
 }
 
-export default button;
+export default Button;

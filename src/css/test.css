@@ -1,0 +1,67 @@
+.test-container {
+  height: 80vh;
+  padding-top: 20vh;
+  width: 50vw;
+  user-select: none;
+  text-align: center;
+}
+.home {
+  display: block;
+  margin: 0 0 5px 4rem;
+  width: 50px;
+  font-size: 1rem;
+  color: #947A77;
+  text-decoration: none;
+}
+.test-body {
+  border: 3px solid #D78E8C;
+  border-radius: 4rem;
+  height: 60vh;
+}
+.test-countdown {
+  font-family: "NanumSquareRound-extrabold";
+  color: #AD6B69;
+  font-size: 7rem;
+  margin-top: calc(30vh - 2.5rem);
+}
+.test-start {
+  margin: 0 auto;
+  padding-top: calc(30vh - 4rem - 65px);
+}
+.current-word {
+  font-size: 4rem;
+}
+.test-timer {
+  font-size: 2rem;
+}
+.option {
+  height: 2rem;
+  color: #AD6B69;
+  margin: 100px 0 50px 0;
+}
+.question {
+  font-family: "NanumSquareRound-bold";
+  height: 2rem;
+  font-size: 2rem;
+}
+input {
+  width: 200px;
+  font-size: 2rem;
+  border: none;
+  color: #AD6B69;
+  margin: 10px 0 10px 0;
+  padding: 0 10px 0 20px;
+  background-color: #EBC4BE;
+  border-radius: 30px;
+}
+.start-button {
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+}
+.test-score {
+  margin-top: calc(30vh - 55px - 2rem);
+  font-family: "NanumSquareRound-extrabold";
+  color: #AD6B69;
+  font-size: 4rem;
+}

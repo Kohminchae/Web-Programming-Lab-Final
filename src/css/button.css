@@ -5,6 +5,8 @@
   padding-right: 16px;
   transition: box-shadow .15s,transform .15s;
   touch-action: manipulation;
+  user-select: none;
+  font-family: "NanumSquareRound-bold";
 }
 
 .button-component:focus {

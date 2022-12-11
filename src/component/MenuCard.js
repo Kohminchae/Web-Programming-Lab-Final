@@ -1,13 +1,13 @@
 import '../css/menuCard.css'
+import { Link } from 'react-router-dom';
 
-function MenuCard({color, text, height, width, fontSize}) {
-  const cardStyle = {
-
-  }
+function MenuCard({text, next}) {
   return (
-    <div className="menuCard-component" style={cardStyle}>
-      {text}
-    </div>
+    <Link to={next} style={{textDecoration: "none"}}>
+      <div className="menuCard-component">
+        {text}
+      </div>
+    </Link>
   );
 }
 
